@@ -1,9 +1,8 @@
 
 import java.util.Arrays;
-
-class SelectionSort {
-  void selectionSort(int array[]) {
-    int size = array.length;
+  public static void main(String args[]) {
+    int[] data = {6,234,2,4,6 };
+     int size = array.length;
 
     for (int step = 0; step < size - 1; step++) {
       int min_idx = step;
@@ -17,12 +16,6 @@ class SelectionSort {
       array[step] = array[min_idx];
       array[min_idx] = temp;
     }
-  }
-
-  public static void main(String args[]) {
-    int[] data = { 20, 12, 10, 15, 2 };
-    SelectionSort ss = new SelectionSort();
-    ss.selectionSort(data);
     System.out.println("Sorted Array in Ascending Order: ");
     System.out.println(Arrays.toString(data));
   }
