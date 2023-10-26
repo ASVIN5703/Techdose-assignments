@@ -1,0 +1,44 @@
+class Pair{
+    int node;
+    int wt;
+    Pair(int node,int wt){
+        this.node = node;
+        this.wt = wt;
+    }
+}
+class Travel{
+    int node;
+    int dist;
+    int stop;
+    public Travel(int node,int dist,int stop){
+      this.node=node;
+      this.dist=dist;
+      this.stop=stop;
+    }
+}
+class Solution {
+    public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
+        int dist[] = new int[n];
+        Arrays.fill(dist,(int)1e9);
+         dist[src] = 0;
+        List<List<Pair>> adj = new ArrayList<List<Pair>>();
+        for(int i=0;i<n;i++){
+            adj.add(new ArrayList<Pair>());
+        }
+        for(int i=0;i<flights.length;i++){
+            adj.get(flights[i][0]).add(new Pair(flights[i][1], flights[i][2]));
+        }
+        Queue<Travel> q=new PriorityQueue<Travel>((x,y)->x.stop-y.stop);
+        q.add(new Travel(src,0,0));
+        while(!q.isEmpty()){
+            Travel t=q.poll();
+            for(Pair p: adj.get(t.node)){
+                if(t.dist+p.wt<dist[p.node]&&(t.stop<=k)){
+                    dist[p.node]=t.dist+p.wt;
+                    q.add(new Travel(p.node,dist[p.node],t.stop+1));
+                }
+            }
+        }
+        return dist[dst]==(int)1e9?-1:dist[dst];
+    }
+}
