@@ -1,0 +1,10 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        int minprice=prices[0],maxprof=0;
+        for(int p:prices){
+            minprice=Math.min(minprice,p);
+            maxprof=Math.max(maxprof,p-minprice);
+        }
+     return maxprof;
+    }
+}
